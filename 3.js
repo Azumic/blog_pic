@@ -19,7 +19,7 @@ function delay(ms) {
 
 async function processCovers() {
     for (let index = 0; index < covers.length; index++) {
-        const cover_url = covers[index];
+        const cover_url = covers[index] + "@400w_400h.webp";
         console.log(cover_url);
 
         await sysAD(cover_url);
