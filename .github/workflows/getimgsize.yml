@@ -74,11 +74,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: |
-            comic
+            comic/imglist
             data
             script
             package.json
 
+      - name: 打印文件列表
+        run: ls -R
+      
       # 配置node环境
       - name: 配置node环境
         uses: actions/setup-node@v1
