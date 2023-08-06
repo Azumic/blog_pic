@@ -72,19 +72,6 @@ jobs:
       # 拉取当前github文件
       - name: 拉取文件
         uses: actions/checkout@v2
-        with:
-          path-ignore: |
-            dist/*
-            node_modules/*
-            comic/cover/*
-            page_img/*
-            daily/*
-        # with:
-        #   path: |
-        #     comic/imglist
-        #     data
-        #     script
-        #     package.json
 
       - name: 打印文件列表
         run: ls -R
