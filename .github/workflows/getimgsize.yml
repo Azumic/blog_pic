@@ -83,7 +83,7 @@ jobs:
       - name: 配置node环境
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: "18.16.0"
 
       - name: 安装依赖包
         run: npm install
