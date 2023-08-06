@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Azumic/blog_pic/issues"
   },
-  "homepage": "https://github.com/Azumic/blog_pic#readme"
+  "homepage": "https://github.com/Azumic/blog_pic#readme",
+  "dependencies": {
+    "image-size": "^1.0.2"
+  }
 }
