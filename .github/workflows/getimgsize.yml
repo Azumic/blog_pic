@@ -28,11 +28,12 @@ jobs:
       - name: 拉取文件
         uses: actions/checkout@v2
         with:
-          path: 
-            - comic
-            - data
-            - script
-            - package.json
+          path: |
+            comic
+            data
+            script
+            package.json
+
           # path-ignore:
           #   - dist
           #   - node_modules
