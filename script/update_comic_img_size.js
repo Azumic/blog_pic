@@ -7,6 +7,7 @@ const pic_path = ""
 const tuchuang_path = "https://jsd.cdn.zzko.cn/gh/Azumic/blog_pic@main/"
 const detail_file_ori = "data/comic_detail_ori.json"
 const detail_file = "data/comic_detail.json"
+const pattern = /.+\/(comic\/imglist)\/.*/; // 匹配规则
 
 var data;
 fs.readFile(detail_file_ori, 'utf8', (err, data1) => {
@@ -26,10 +27,16 @@ async function readImgSize(data) {
         var imgInfo = {}
 
         value.imglist.forEach((url, index) => {
-            var img_path = url.replace(tuchuang_path, pic_path)
+            const matchedPart = matchResult[1]; // 匹配到的部分
+            const lastIndex = url.indexOf(matchedPart); // 获取匹配部分在 URL 中的位置
+            const extractedPart = url.substring(0, lastIndex); // 提取匹配部分前面的部分
+            
+            var img_path = url.replace(extractedPart, pic_path)
             var info = getImgSize(img_path)
             imgInfo[index] = info
             imgwidth.push(info.width)
+
+            url = url.replace(extractedPart, tuchuang_path)
         });
 
         oldData[key].imgwidth = imgwidth
