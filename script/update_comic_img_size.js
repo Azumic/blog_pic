@@ -27,16 +27,19 @@ async function readImgSize(data) {
         var imgInfo = {}
 
         value.imglist.forEach((url, index) => {
-            const matchedPart = matchResult[1]; // 匹配到的部分
-            const lastIndex = url.indexOf(matchedPart); // 获取匹配部分在 URL 中的位置
-            const extractedPart = url.substring(0, lastIndex); // 提取匹配部分前面的部分
-            
-            var img_path = url.replace(extractedPart, pic_path)
-            var info = getImgSize(img_path)
-            imgInfo[index] = info
-            imgwidth.push(info.width)
-
-            url = url.replace(extractedPart, tuchuang_path)
+            const matchResult = url.match(pattern);
+            if (matchResult) {
+                const matchedPart = matchResult[1]; // 匹配到的部分
+                const lastIndex = url.indexOf(matchedPart); // 获取匹配部分在 URL 中的位置
+                const extractedPart = url.substring(0, lastIndex); // 提取匹配部分前面的部分
+                
+                var img_path = url.replace(extractedPart, pic_path)
+                var info = getImgSize(img_path)
+                imgInfo[index] = info
+                imgwidth.push(info.width)
+    
+                url = url.replace(extractedPart, tuchuang_path)
+            }
         });
 
         oldData[key].imgwidth = imgwidth
