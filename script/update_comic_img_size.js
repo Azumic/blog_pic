@@ -21,11 +21,13 @@ fs.readFile(detail_file_ori, 'utf8', (err, data1) => {
 
 async function readImgSize(data) {
     var oldData = JSON.parse(data);
+    var newData = oldData
     Object.entries(oldData).forEach(async ([key, value]) => {
 
         var imgwidth = []
         var imgInfo = {}
 
+        let i=0;
         value.imglist.forEach((url, index) => {
             const matchResult = url.match(pattern);
             if (matchResult) {
@@ -38,23 +40,29 @@ async function readImgSize(data) {
                 imgInfo[index] = info
                 imgwidth.push(info.width)
     
-                url = url.replace(extractedPart, tuchuang_path)
+                const newUrl = url.replace(extractedPart, tuchuang_path)
+                newData[key]["imglist"][i++] = newUrl
             }
         });
 
         oldData[key].imgwidth = imgwidth
         oldData[key].imgInfo = imgInfo
 
-        // console.log(value);
+        newData[key].imgwidth = imgwidth
+        newData[key].imgInfo = imgInfo
+
+        console.log(newData[key]);
 
     });
 
-    fs.writeFile(detail_file, JSON.stringify(oldData), (err) => {
+    fs.writeFile(detail_file, JSON.stringify(newData), (err) => {
         if (err) {
             console.error('写入文件失败：', err);
             return;
         }
         console.log('JSON 文件已成功生成！');
+        console.log(newData)
+        console.log("------------------------------------------")
     });
 }
 
